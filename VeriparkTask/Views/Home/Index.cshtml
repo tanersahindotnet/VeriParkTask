@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@model VeriparkTask.Models.InputModels.CheckInInput
+<br/>
+<form method="post">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(p => p.BookCheckIn)
+                @Html.TextBoxFor(p => p.BookCheckIn, new { @class = "form-control", @type = "date" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(p => p.BookReceived)
+                @Html.TextBoxFor(p => p.BookReceived, new { @class = "form-control", @type = "date" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(p => p.CountryId)
+                @Html.DropDownListFor(p => p.CountryId, (List<SelectListItem>)ViewBag.countryDropDownItems, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <h1>@ViewBag.result</h1>
+    </div>
+</form>

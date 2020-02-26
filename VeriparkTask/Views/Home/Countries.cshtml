@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@using VeriparkTask.Models
+@model VeriparkTask.Models.Country
+<br />
+<form method="post">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(p => p.CountryName)
+                @Html.TextBoxFor(p => p.CountryName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(p => p.CurrencyCode)
+                @Html.TextBoxFor(p => p.CurrencyCode, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(p => p.PenaltyAmount)
+                @Html.TextBoxFor(p => p.PenaltyAmount, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(p => p.PenaltyAmount)
+                @Html.TextBoxFor(p => p.PenaltyAmount, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(p => p.OffDay1)
+                @Html.DropDownListFor(p => p.OffDay1, new List<SelectListItem>
+                {
+                    new SelectListItem{ Text = DayOfWeek.Monday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Friday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Saturday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Sunday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Thursday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Tuesday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Wednesday.ToString()},
+                }, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(p => p.OffDay2)
+                @Html.DropDownListFor(p => p.OffDay2, new List<SelectListItem>
+                {
+                    new SelectListItem{ Text = DayOfWeek.Monday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Friday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Saturday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Sunday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Thursday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Tuesday.ToString()},
+                    new SelectListItem{ Text = DayOfWeek.Wednesday.ToString()},
+                }, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+<br/> <br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Country Name</th>
+            <th scope="col">Currency Code</th>
+            <th scope="col">Penalty Amount</th>
+            <th scope="col">Off Day 1</th>
+            <th scope="col">Off Day 2</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Country item in ViewBag.countries)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.CountryName</td>
+                <td>@item.CurrencyCode</td>
+                <td>@item.PenaltyAmount</td>
+                <td>@item.OffDay1</td>
+                <td>@item.OffDay2</td>
+                <td>
+                    @Html.ActionLink("Delete", "Countries", "Home", new { item.Id, }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        if ('@ViewData["Error"]' !== '')
+        {
+            window.toastr.error('@ViewData["Error"]', 'Error');
+        }
+        if ('@ViewData["Success"]' !== '')
+        {
+            window.toastr.success('@ViewData["Success"]', 'Success');
+        }
+    });
+</script>

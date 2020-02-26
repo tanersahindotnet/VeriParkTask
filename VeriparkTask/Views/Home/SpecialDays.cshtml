@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@using VeriparkTask.Models
+@model VeriparkTask.Models.SpecialDay
+<br />
+<form method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(p => p.SpecialDate)
+                @Html.TextBoxFor(p => p.SpecialDate, new { @class = "form-control", @type = "date", @value = DateTime.Now })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(p => p.CountryId)
+                @Html.DropDownListFor(p => p.CountryId, (List<SelectListItem>)ViewBag.countryDropDownItems, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Special Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (SpecialDay item in ViewBag.specialDays)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.SpecialDate</td>
+                    <td>
+                        @Html.ActionLink("Delete", "SpecialDays", "Home", new { item.Id, }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        if ('@ViewData["Error"]' !== '')
+        {
+            window.toastr.error('@ViewData["Error"]', 'Error');
+        }
+        if ('@ViewData["Success"]' !== '')
+        {
+            window.toastr.success('@ViewData["Success"]', 'Success');
+        }
+    });
+</script>
