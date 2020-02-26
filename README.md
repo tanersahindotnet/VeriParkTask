@@ -2,7 +2,7 @@
 
 VeriPark Penalty Calculator Task
 
-Task Result: ✓ Passed
+Task Result: ✔ Passed
 
 Requirements
 1) Develop a web page on which users will input
